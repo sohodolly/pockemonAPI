@@ -1,94 +1,139 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
- <title>Pokemon Search</title> 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
- <link rel="stylesheet" type="text/css" href="style-2.css"> 
-</head> 
-<body> 
- 
- <header> 
-  <div class="logo"> 
-   <img src="logo.png"> 
-  </div> 
- </header> 
- <nav> 
-  <form id="sort-form"> 
-   <h4>Sort By:</h4> 
-   <label for="id">id:</label> 
-   <input type="radio" name="sort" value="id" id="id" checked="">
-   
-   <label for="name">name:</label> 
-   <input type="radio" name="sort" value="name" id="name"> 
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokémonSearch</title>
 
-   <label for="hp">hp:</label> 
-   <input type="radio" name="sort" value="hp" id="hp"> 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
 
-   <label for="attack">attack:</label> 
-   <input type="radio" name="sort" value="attack" id="attack"> 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="style-2.css">
 
-   <label for="defence">defence:</label> 
-   <input type="radio" name="sort" value="defence" id="defence"> 
- 
+    </head>
 
-   <h4>Order: </h4> 
-   <label for="upsc">from smallest to biggest:</label> 
-   <input type="radio" name="order" value="upsc" id="upsc" checked="">
+<body>
 
-   <label for="desc">from biggest to smallest:</label> 
-   <input type="radio" name="order" value="desc" id="desc"> 
-  </form> 
- 
+    <!-- ═══════ HEADER ═══════ -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="PokéSearch" />
+        </div>
+    </header>
 
-  <form id="filter-form"> 
-   <h4>Filter By:</h4> 
+    <!-- ═══════ NAV / FILTERS ═══════ -->
+    <nav>
+        <div class="nav-grid">
 
-   <div class="search"> 
-    <label for="name-filter">name: </label> 
-    <input type="text" name="name-filter" id="name-filter"> 
-   </div> 
+            <!-- ─── SORT ─── -->
+            <div class="form-section">
+                <h4><i class="fa fa-sort"></i> Сортировка</h4>
+                <form id="sort-form">
+                    <div class="sort-row">
+                        <label for="id"><input type="radio" name="sort" value="id" id="id" checked /> №</label>
+                        <label for="name"><input type="radio" name="sort" value="name" id="name" /> Имя</label>
+                        <label for="hp"><input type="radio" name="sort" value="hp" id="hp" /> HP</label>
+                        <label for="attack"><input type="radio" name="sort" value="attack" id="attack" /> Atk</label>
+                        <label for="defence"><input type="radio" name="sort" value="defence" id="defence" /> Def</label>
 
-   <div class="ranges">
+                        <span class="divider">|</span>
 
-    <div class="hp-ranges">
-     <label for="hp-filter-from">hp from:</label>
-     <input type="range" name="hp-filter-from" id="hp-filter-from" min="10" max="250" value="10">
+                        <span class="order-label">Порядок</span>
+                        <label for="upsc"><input type="radio" name="order" value="upsc" id="upsc" checked /> ▲</label>
+                        <label for="desc"><input type="radio" name="order" value="desc" id="desc" /> ▼</label>
+                    </div>
+                </form>
+            </div>
 
-     <label for="hp-filter-to">hp to:</label>
-     <input type="range" name="hp-filter-to" id="hp-filter-to" min="10" max="250" value="250">
-    </div>
+            <!-- ─── FILTER ─── -->
+            <div class="form-section">
+                <h4><i class="fa fa-filter"></i> Фильтры</h4>
+                <form id="filter-form">
+                    <div class="filter-group">
 
+                        <!-- name -->
+                        <div class="filter-row">
+                            <div class="search-wrapper">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="name-filter" id="name-filter" placeholder="Имя покемона…" />
+                            </div>
+                        </div>
 
-    <div class="attack-ranges">
-     <label for="attack-filter-from">attack from:</label>
-     <input type="range" name="attack-filter-from" id="attack-filter-from" min="5" max="130" value="5">
+                        <!-- ranges -->
+                        <div class="filter-row">
+                            <div class="range-group">
+                                <div class="range-item">
+                                    <label for="hp-filter-from">HP</label>
+                                    <input type="range" name="hp-filter-from" id="hp-filter-from" min="10" max="250" value="10" />
+                                    <span id="hp-from-val">10</span>
+                                    <span style="color:rgba(255,255,255,0.1);">—</span>
+                                    <input type="range" name="hp-filter-to" id="hp-filter-to" min="10" max="250" value="250" />
+                                    <span id="hp-to-val">250</span>
+                                </div>
+                            </div>
+                        </div>
 
-     <label for="attack-filter-to">attack to:</label>
-     <input type="range" name="attack-filter-to" id="attack-filter-to" min="5" max="130" value="130">
-    </div>
+                        <div class="filter-row">
+                            <div class="range-group">
+                                <div class="range-item">
+                                    <label for="attack-filter-from">Atk</label>
+                                    <input type="range" name="attack-filter-from" id="attack-filter-from" min="5" max="130" value="5" />
+                                    <span id="atk-from-val">5</span>
+                                    <span style="color:rgba(255,255,255,0.1);">—</span>
+                                    <input type="range" name="attack-filter-to" id="attack-filter-to" min="5" max="130" value="130" />
+                                    <span id="atk-to-val">130</span>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="filter-row">
+                            <div class="range-group">
+                                <div class="range-item">
+                                    <label for="defence-filter-from">Def</label>
+                                    <input type="range" name="defence-filter-from" id="defence-filter-from" min="5" max="180" value="5" />
+                                    <span id="def-from-val">5</span>
+                                    <span style="color:rgba(255,255,255,0.1);">—</span>
+                                    <input type="range" name="defence-filter-to" id="defence-filter-to" min="5" max="180" value="180" />
+                                    <span id="def-to-val">180</span>
+                                </div>
+                            </div>
+                        </div>
 
-    <div class="defence-ranges">
-     <label for="defence-filter-from">defence from:</label>
-     <input type="range" name="defence-filter-from" id="defence-filter-from" min="5" max="180" value="5">
+                        <!-- action -->
+                        <div class="filter-actions">
+                            <button type="submit" class="btn-apply">
+                                <i class="fa fa-check"></i> Применить
+                            </button>
+                        </div>
 
-     <label for="defence-filter-to">defence to:</label>
-     <input type="range" name="defence-filter-to" id="defence-filter-to" min="5" max="180" value="180">
-    </div>
-   </div>
+                    </div>
+                </form>
+            </div>
 
-   
+        </div>
+    </nav>
 
-   <input type="submit" value="Apply filters" class="btn"> 
-  </form> 
- 
- </nav> 
- <main> 
-  <div id="result"></div> 
- </main> 
- 
-  
- 
-<script type="text/javascript" src="main.js"></script> 
-</body> 
+    <!-- ═══════ MAIN / RESULTS ═══════ -->
+    <main>
+        <div id="result"></div>
+    </main>
+
+    <!-- ═══════ SCRIPTS ═══════ -->
+    <script>
+        // ─── live range value display ───
+        document.querySelectorAll('input[type="range"]').forEach(range => {
+            range.addEventListener('input', function() {
+                const id = this.id;
+                const val = this.value;
+                const span = document.getElementById(id.replace('-from', '-from-val').replace('-to', '-to-val'));
+                if (span) span.textContent = val;
+            });
+        });
+    </script>
+    <script type="text/javascript" src="main.js"></script>
+
+</body>
 </html>
