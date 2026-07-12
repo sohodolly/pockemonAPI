@@ -1,0 +1,86 @@
+body{
+	background-image: url(texture.jpg);
+   }
+   header{
+	display: flex;
+	justify-content: center;
+   }
+   main{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+   }
+   #result{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 3rem;
+	height: 5000px;
+   }
+   .pokemon > .stats{
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	font-size: 1.2rem;
+   }
+   .pokemon-list{
+	list-style: none;
+	width: 20rem;
+	padding: 0;
+   }
+   .pokemon-list li{
+	padding: 0.5rem 1rem;
+	background-color: white;
+	position: relative;
+	border: 1px solid black;
+	border-radius: 2rem;
+	cursor: pointer;
+   }
+   .pokemon-list li:hover{
+	box-shadow: 0 0 8px 0;
+	z-index: 2;
+   }
+   .pokemon{
+	padding: 0.5rem 0;
+	box-shadow: 0 0 5px 0;
+	text-align: center;
+	width: 20rem;
+	height: 20rem;
+	background-color: white;
+	margin-top: 2rem;
+	border-radius: 2rem;
+   }
+   nav{
+	background-color: white;
+	padding: 0.2rem 3rem 1rem;
+	box-shadow: 0 0 5px 0;
+	border-radius: 2rem;
+	margin: 1rem 4rem 0;
+	text-align: center;
+   }
+   #filter-form input{
+	border: 3px solid blue;
+	color: blue;
+	border-radius: 5px;
+   }
+   #filter-form label{
+	color: blue;
+   }
+   #filter-form .btn{
+	background-color: white;
+	border: 3px solid blue;
+	color: blue;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 5px;
+   }
+   #filter-form .btn:hover{
+	background-color: blue;
+	color: white;
+   }
+   .types{
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	width: 60%;
+	margin: 0.5rem auto;
+   }
